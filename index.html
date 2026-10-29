@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>The Wilders</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700;9..144,900&family=Mulish:wght@400;500;600;700;800&display=swap">
+<style>
+  /* Layout: single-column editorial landing; storm-night hero, warm-paper body; sections banded by role. */
+  :root{
+    --paper:#f4f2ec; --surface:#ffffff; --ink:#192038; --ink-soft:#4a5068;
+    --muted:#6f7486; --line:#e4e0d6;
+    --gold:#e39d2b; --gold-deep:#c8821a; --teal:#1f7a8c; --storm:#222a46; --storm-deep:#161c30;
+    --on-storm:#f3f1ea; --on-storm-soft:#b9bed0;
+    --shadow:0 18px 50px -24px rgba(22,28,48,.45);
+    --radius:18px;
+    --fs-display:clamp(2.6rem,7vw,5rem);
+    --fs-h2:clamp(1.7rem,3.6vw,2.7rem);
+    --fs-h3:1.2rem;
+    --maxw:1120px;
+  }
+  @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+    --paper:#11151f; --surface:#1a2030; --ink:#edeff5; --ink-soft:#c4c8d6;
+    --muted:#8e94a6; --line:#2a3248;
+    --gold:#f0b03f; --gold-deep:#e39d2b; --teal:#4fb3c6; --storm:#0d1120; --storm-deep:#090c16;
+    --on-storm:#f3f1ea; --on-storm-soft:#aab0c6;
+    --shadow:0 18px 50px -24px rgba(0,0,0,.6);
+    color-scheme:dark;
+  }}
+  :root[data-theme="dark"]{
+    --paper:#11151f; --surface:#1a2030; --ink:#edeff5; --ink-soft:#c4c8d6;
+    --muted:#8e94a6; --line:#2a3248;
+    --gold:#f0b03f; --gold-deep:#e39d2b; --teal:#4fb3c6; --storm:#0d1120; --storm-deep:#090c16;
+    --on-storm:#f3f1ea; --on-storm-soft:#aab0c6;
+    --shadow:0 18px 50px -24px rgba(0,0,0,.6);
+    color-scheme:dark;
+  }
+
+  *{box-sizing:border-box}
+  body{background:var(--paper);color:var(--ink);font-family:"Mulish",system-ui,-apple-system,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+  h1,h2,h3,.display{font-family:"Fraunces","Mulish",Georgia,serif;line-height:1.05;text-wrap:balance;margin:0}
+  p{margin:0}
+  a{color:inherit}
+  img{display:block}
+  .wrap{width:100%;max-width:var(--maxw);margin-inline:auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+  .eyebrow{font-weight:800;text-transform:uppercase;letter-spacing:.16em;font-size:.72rem;color:var(--gold-deep)}
+  .btn{display:inline-flex;align-items:center;gap:.5em;font-weight:800;font-size:.95rem;padding:.8em 1.4em;border-radius:999px;text-decoration:none;border:2px solid transparent;cursor:pointer;transition:transform .15s ease,box-shadow .15s ease}
+  .btn:hover{transform:translateY(-2px)}
+  .btn-gold{background:var(--gold);color:#201700;box-shadow:0 10px 24px -10px var(--gold-deep)}
+  .btn-ghost{background:transparent;border-color:currentColor;color:inherit}
+  .btn-ghost.on-storm{color:var(--on-storm)}
+
+  /* ---------- top nav ---------- */
+  header.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--paper) 86%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:21;background:var(--paper)}
+  .nav-in{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding-block:.7rem}
+  .brand{display:flex;align-items:center;gap:.55rem;font-family:"Fraunces",serif;font-weight:900;font-size:1.15rem;letter-spacing:.01em;text-decoration:none}
+  .brand .mark{width:30px;height:30px;border-radius:9px;background:var(--storm);color:var(--gold);display:grid;place-items:center;font-size:1rem;font-weight:900;flex:none}
+  .nav-links{display:flex;align-items:center;gap:1.6rem}
+  .nav-links a.link{font-weight:700;font-size:.9rem;text-decoration:none;color:var(--ink-soft)}
+  .nav-links a.link:hover{color:var(--ink)}
+  @media(max-width:720px){.nav-links a.link{display:none}}
+
+  /* ---------- hero ---------- */
+  .hero{background:radial-gradient(130% 120% at 80% -10%,var(--storm) 0%,var(--storm-deep) 70%);color:var(--on-storm);position:relative;overflow:hidden}
+  .hero::after{content:"";position:absolute;inset:0;background:
+     repeating-linear-gradient(103deg,transparent 0 22px,rgba(243,241,234,.028) 22px 24px);
+     pointer-events:none}
+  .hero-in{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(1.5rem,4vw,3.4rem);align-items:center;padding-block:clamp(2.6rem,6vw,4.6rem)}
+  @media(max-width:860px){.hero-in{grid-template-columns:1fr;text-align:center}}
+  .hero h1{font-size:var(--fs-display);font-weight:900;letter-spacing:-.01em;margin:.5rem 0 .2rem}
+  .hero h1 .amp{color:var(--gold)}
+  .hero .sub{font-family:"Fraunces",serif;font-weight:500;font-size:clamp(1.15rem,2.3vw,1.6rem);color:var(--on-storm);opacity:.95;margin-bottom:1rem}
+  .hero .thesis{color:var(--on-storm-soft);max-width:46ch;font-size:1.02rem}
+  @media(max-width:860px){.hero .thesis{margin-inline:auto}}
+  .hero-cta{display:flex;flex-wrap:wrap;gap:.7rem;margin-top:1.6rem}
+  @media(max-width:860px){.hero-cta{justify-content:center}}
+  .hero-art{position:relative}
+  .hero-art img{width:100%;max-width:100%;border-radius:var(--radius);background:#d9d9dd;box-shadow:var(--shadow)}
+  .art-tag{position:absolute;bottom:10px;right:10px;background:color-mix(in srgb,var(--storm-deep) 80%,transparent);color:var(--on-storm-soft);font-size:.68rem;font-weight:700;letter-spacing:.05em;padding:.3em .7em;border-radius:999px;backdrop-filter:blur(4px)}
+  .badge-soon{display:inline-flex;align-items:center;gap:.5em;background:rgba(227,157,43,.16);border:1px solid var(--gold);color:var(--gold);font-weight:800;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;padding:.4em .9em;border-radius:999px}
+
+  /* ---------- generic section ---------- */
+  section{padding-block:clamp(3rem,7vw,5.2rem)}
+  .sec-head{max-width:40ch;margin-bottom:2.2rem}
+  .sec-head.center{margin-inline:auto;text-align:center}
+  .sec-head h2{font-size:var(--fs-h2);font-weight:700;margin:.5rem 0 .6rem}
+  .sec-head p{color:var(--muted);font-size:1.05rem}
+
+  /* mission band */
+  .mission{background:var(--surface);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .mission .big{font-family:"Fraunces",serif;font-weight:600;font-size:clamp(1.6rem,3.5vw,2.6rem);line-height:1.18;max-width:20ch;text-wrap:balance}
+  .mission .big em{font-style:italic;color:var(--gold-deep)}
+  .pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:1.3rem;margin-top:2.4rem}
+  @media(max-width:760px){.pillars{grid-template-columns:1fr}}
+  .pillar{border-left:3px solid var(--teal);padding:.2rem 0 .2rem 1.1rem}
+  .pillar h3{font-family:"Mulish",sans-serif;font-weight:800;font-size:1.05rem;margin-bottom:.3rem}
+  .pillar p{color:var(--muted);font-size:.95rem}
+
+  /* book 1 feature */
+  .book{display:grid;grid-template-columns:1fr 1fr;gap:clamp(1.6rem,4vw,3.2rem);align-items:center}
+  @media(max-width:820px){.book{grid-template-columns:1fr}}
+  .book-cover{aspect-ratio:4/5;border-radius:var(--radius);background:linear-gradient(160deg,var(--storm),var(--storm-deep));color:var(--on-storm);box-shadow:var(--shadow);padding:clamp(1.4rem,3vw,2.2rem);display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden;max-width:100%}
+  .book-cover::before{content:"";position:absolute;right:-30%;top:-20%;width:80%;height:70%;background:radial-gradient(circle,rgba(227,157,43,.28),transparent 65%)}
+  .book-cover .k-series{font-weight:800;letter-spacing:.2em;text-transform:uppercase;font-size:.68rem;color:var(--gold);position:relative}
+  .book-cover .k-title{font-family:"Fraunces",serif;font-weight:900;font-size:clamp(1.7rem,3.4vw,2.4rem);line-height:1.04;position:relative}
+  .book-cover .k-foot{position:relative;display:flex;align-items:center;justify-content:space-between;font-size:.8rem;color:var(--on-storm-soft)}
+  .coin{width:46px;height:46px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#ffd87a,var(--gold-deep));box-shadow:0 0 0 4px rgba(227,157,43,.18)}
+  .book-copy h2{font-size:var(--fs-h2);font-weight:700;margin:.6rem 0 .8rem}
+  .book-copy p{color:var(--ink-soft);margin-bottom:1rem}
+  .lesson{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--gold);border-radius:12px;padding:1rem 1.2rem}
+  .lesson .lab{font-size:.68rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-deep)}
+  .lesson p{font-family:"Fraunces",serif;font-style:italic;font-size:1.12rem;color:var(--ink);margin:.3rem 0 0}
+
+  /* cast */
+  .cast{background:var(--surface);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .cast-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem}
+  @media(max-width:820px){.cast-grid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:520px){.cast-grid{grid-template-columns:1fr}}
+  .ch{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:1.2rem 1.2rem 1.3rem;display:flex;flex-direction:column;gap:.5rem;min-width:0}
+  .ch-top{display:flex;align-items:center;gap:.7rem}
+  .ch-mono{width:44px;height:44px;border-radius:12px;flex:none;display:grid;place-items:center;font-family:"Fraunces",serif;font-weight:900;font-size:1.3rem;color:#fff}
+  .ch-name{font-family:"Fraunces",serif;font-weight:700;font-size:1.15rem;line-height:1}
+  .ch-role{font-size:.72rem;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);margin-top:.25rem}
+  .ch p{font-size:.92rem;color:var(--ink-soft)}
+
+  /* vision */
+  .vision .v-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:clamp(1.5rem,4vw,3rem);align-items:center}
+  @media(max-width:820px){.vision .v-grid{grid-template-columns:1fr}}
+  .vision h2{font-size:var(--fs-h2);font-weight:700;margin-bottom:1rem}
+  .vision p{color:var(--ink-soft);margin-bottom:1rem;max-width:52ch}
+  .facts{display:grid;gap:.8rem}
+  .fact{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:1rem 1.2rem}
+  .fact b{font-family:"Fraunces",serif;font-size:1.3rem;color:var(--teal);display:block}
+  .fact span{font-size:.9rem;color:var(--muted)}
+
+  /* cta */
+  .signup{background:radial-gradient(120% 140% at 10% 0%,var(--storm) 0%,var(--storm-deep) 72%);color:var(--on-storm);text-align:center}
+  .signup h2{font-size:var(--fs-h2);font-weight:800;margin-bottom:.7rem}
+  .signup p{color:var(--on-storm-soft);max-width:48ch;margin:0 auto 1.6rem}
+  .signup .row{display:flex;flex-wrap:wrap;gap:.7rem;justify-content:center}
+  .copybox{display:inline-flex;align-items:center;gap:.6rem;background:rgba(243,241,234,.08);border:1px solid rgba(243,241,234,.22);border-radius:999px;padding:.45rem .5rem .45rem 1.1rem;color:var(--on-storm);font-weight:700;font-size:.9rem}
+  .copybox button{font-family:inherit}
+  .note{margin-top:1.4rem;font-size:.8rem;color:var(--on-storm-soft)}
+
+  footer{padding-block:2.2rem;background:var(--storm-deep);color:var(--on-storm-soft);font-size:.85rem}
+  .foot-in{display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;align-items:center}
+  footer a{color:var(--gold);text-decoration:none;font-weight:700}
+
+  @media(prefers-reduced-motion:reduce){*{transition:none!important}}
+  :focus-visible{outline:3px solid var(--teal);outline-offset:2px;border-radius:6px}
+</style>
+<style>html,body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+<header class="nav">
+  <div class="wrap nav-in">
+    <a class="brand" href="#top"><span class="mark">W</span>The Wilders</a>
+    <nav class="nav-links">
+      <a class="link" href="#series">The Series</a>
+      <a class="link" href="#book1">Book 1</a>
+      <a class="link" href="#family">The Family</a>
+      <a class="btn btn-gold" href="#list">Get launch news</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero-in">
+      <div class="hero-text">
+        <span class="eyebrow">A new children's book series</span>
+        <h1>The Wilders</h1>
+        <p class="sub">Smart stories for kids who ask&nbsp;<span class="amp">why</span>.</p>
+        <p class="thesis">Teach them how the world really works &mdash; money, ownership, scams, the apps built to hook them, thinking for themselves &mdash; before the world teaches them the hard way.</p>
+        <div class="hero-cta">
+          <a class="btn btn-gold" href="#book1">Meet Book&nbsp;1</a>
+          <a class="btn btn-ghost on-storm" href="#list">Get launch news</a>
+        </div>
+      </div>
+      <div class="hero-art">
+        <img src="cast.png" width="1774" height="887" alt="The Wilder family: Grant and Gemma, their kids Addie, Chase and Ash, and Moosie the bulldog, standing side by side.">
+        <span class="art-tag">Meet the Wilders</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- MISSION -->
+  <section class="mission" id="series">
+    <div class="wrap">
+      <span class="eyebrow">Why this series exists</span>
+      <p class="big">Kids learn plenty in school. They just don't learn <em>how the world actually works.</em></p>
+      <div class="pillars">
+        <div class="pillar">
+          <h3>Real money sense</h3>
+          <p>Earning, owning, who profits off you, and why "free" almost never is. The lessons school skips.</p>
+        </div>
+        <div class="pillar">
+          <h3>Think for yourself</h3>
+          <p>A family that questions, researches, and figures things out &mdash; instead of taking the easy answer handed to them.</p>
+        </div>
+        <div class="pillar">
+          <h3>No lectures</h3>
+          <p>Plain truth told through a story kids actually want to re-read. The lesson is in what happens, never a checklist.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BOOK 1 -->
+  <section id="book1">
+    <div class="wrap book">
+      <div class="book-cover" aria-hidden="true">
+        <span class="k-series">The Wilders &middot; Book One</span>
+        <span class="k-title">The Free Game That Wasn't</span>
+        <div class="k-foot"><span>A Wilder Family Story</span><span class="coin"></span></div>
+      </div>
+      <div class="book-copy">
+        <span class="badge-soon">&#9679; Coming soon</span>
+        <h2>The Free Game That Wasn't</h2>
+        <p>A three o'clock Florida storm, a bored family on the couch, and a bright new game on the big TV that costs nothing to play. <strong>Castle Kingdoms</strong> rains gold coins, flashes a countdown clock, and dares you not to miss a day.</p>
+        <p>Chase is all in. Ash starts asking the questions nobody else is asking. And one by one the Wilders figure out the oldest trick there is &mdash; dressed up in new colors.</p>
+        <div class="lesson">
+          <span class="lab">The lesson</span>
+          <p>&ldquo;Nothing is free. Somebody always pays. If you can't see who &mdash; look in the mirror.&rdquo;</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAMILY -->
+  <section class="cast" id="family">
+    <div class="wrap">
+      <div class="sec-head center">
+        <span class="eyebrow">The cast</span>
+        <h2>Meet the Wilders</h2>
+        <p>A family of big ideas and strong opinions &mdash; and one 82-pound bulldog who's always exactly where he shouldn't be.</p>
+      </div>
+      <div class="cast-grid">
+        <div class="ch">
+          <div class="ch-top"><div class="ch-mono" style="background:#2f6f7d">G</div><div><div class="ch-name">Grant</div><div class="ch-role">Dad &middot; builds his own thing</div></div></div>
+          <p>Problem-solver, business owner, and the family's funny guy. He can build, fix, or figure out almost anything &mdash; and once he's sure he's right, good luck changing his mind.</p>
+        </div>
+        <div class="ch">
+          <div class="ch-top"><div class="ch-mono" style="background:#b06a9c">G</div><div><div class="ch-name">Gemma</div><div class="ch-role">Mom &middot; runs her own brokerage</div></div></div>
+          <p>Smart, confident, generous, and nobody's fool. She says what she thinks even when nobody wants to hear it, and she's usually three steps ahead. Sometimes her confidence gets there first.</p>
+        </div>
+        <div class="ch">
+          <div class="ch-top"><div class="ch-mono" style="background:#8a4fb0">A</div><div><div class="ch-name">Addie</div><div class="ch-role">The big sister &middot; 14</div></div></div>
+          <p>Independent, outspoken, and always one step ahead &mdash; or so she thinks. Addie has an opinion about everything and will challenge anyone, especially her brothers.</p>
+        </div>
+        <div class="ch">
+          <div class="ch-top"><div class="ch-mono" style="background:#c8821a">C</div><div><div class="ch-name">Chase</div><div class="ch-role">The big dreamer &middot; 12</div></div></div>
+          <p>Athletic, competitive, charming, and full of ideas. Chase doesn't just dream big &mdash; he makes things happen and can talk almost anyone into an adventure. Sometimes his excitement runs ahead of his judgment.</p>
+        </div>
+        <div class="ch">
+          <div class="ch-top"><div class="ch-mono" style="background:#1f7a8c">A</div><div><div class="ch-name">Ash</div><div class="ch-role">The question master &middot; 10</div></div></div>
+          <p>Curious, confident, funny, and the family's stock-chart expert. Ash asks the questions nobody else thinks to ask and notices what everybody else misses. Don't underestimate the youngest.</p>
+        </div>
+        <div class="ch">
+          <div class="ch-top"><div class="ch-mono" style="background:#5a6274">M</div><div><div class="ch-name">Moosie</div><div class="ch-role">The family bulldog</div></div></div>
+          <p>Eighty-two pounds of wrinkles, snoring, and stubbornness &mdash; always exactly where he shouldn't be, especially when food is involved. Never says a word, always part of the action.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VISION -->
+  <section class="vision">
+    <div class="wrap v-grid">
+      <div>
+        <span class="eyebrow">The bigger picture</span>
+        <h2>Book one of many.</h2>
+        <p>The Wilders live on a few acres outside Tampa, where the afternoon storms roll in at three and the real world keeps handing kids lessons school never gets to.</p>
+        <p>Each book takes on one of those lessons &mdash; the "free" game that hooks you, the deal that's too good, owning versus renting your whole life, who really profits when something goes viral. A growing library for parents who want their kids to see clearly.</p>
+      </div>
+      <div class="facts">
+        <div class="fact"><b>Ages 6&ndash;11</b><span>Read-aloud and early-reader, for sharp kids and the parents reading with them.</span></div>
+        <div class="fact"><b>One family, many lessons</b><span>A cast kids grow up with, book after book.</span></div>
+        <div class="fact"><b>Truth, not lectures</b><span>In the spirit of the books that trust kids to think.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SIGNUP -->
+  <section class="signup" id="list">
+    <div class="wrap">
+      <h2>Be first when Book&nbsp;1 drops.</h2>
+      <p>Launch date, the cover reveal, and free printable coloring pages of the Wilders &mdash; straight to you, no spam.</p>
+      <div class="row">
+        <a class="btn btn-gold" href="https://www.pinterest.com/madelynbobooks/" target="_blank" rel="noopener">Follow on Pinterest</a>
+      </div>
+      <p class="note" id="copynote">The email list opens with the full site. Until then, follow along for the cover reveal and launch date.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap foot-in">
+    <span>&copy; 2026 The Wilders &mdash; a children's book series. For Madelyn.</span>
+    <span>Art in progress &middot; <a href="#top">back to top</a></span>
+  </div>
+</footer>
+
+<script>
+  // copy-to-clipboard for the contact address (clipboard write inside the click handler, with fallback)
+  document.querySelectorAll("[data-copy]").forEach(function(b){
+    b.addEventListener("click",function(){
+      var txt=b.getAttribute("data-copy");
+      var note=document.getElementById("copynote");
+      function done(){ if(note){var o=note.textContent; note.textContent="Copied "+txt; setTimeout(function(){note.textContent=o;},2200);} b.textContent="Copied"; setTimeout(function(){b.textContent="Copy";},2200); }
+      if(navigator.clipboard&&navigator.clipboard.writeText){
+        navigator.clipboard.writeText(txt).then(done).catch(selectFallback);
+      } else { selectFallback(); }
+      function selectFallback(){
+        try{ var r=document.createRange(); var tmp=document.createElement("span"); tmp.textContent=txt; document.body.appendChild(tmp); r.selectNode(tmp); var s=getSelection(); s.removeAllRanges(); s.addRange(r); setTimeout(function(){s.removeAllRanges(); tmp.remove();},1500); done(); }catch(e){}
+      }
+    });
+  });
+  // smooth-scroll for same-page anchors
+  document.querySelectorAll('a[href^="#"]').forEach(function(a){
+    a.addEventListener("click",function(e){
+      var id=a.getAttribute("href").slice(1); if(!id){return;}
+      var el=document.getElementById(id); if(el){e.preventDefault(); el.scrollIntoView({behavior:"smooth",block:"start"});}
+    });
+  });
+</script>
+</body>
+</html>
