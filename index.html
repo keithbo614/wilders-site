@@ -100,12 +100,58 @@
     -webkit-text-stroke:1px rgba(243,241,234,.3);will-change:transform}
   .marquee b{color:var(--gold);-webkit-text-stroke:0}
 
+  /* email capture */
+  .capture{max-width:40rem;margin-inline:auto}
+  .capture-box{background:rgba(17,24,41,.72);border:1px solid rgba(240,181,63,.28);border-radius:18px;
+    padding:clamp(1.4rem,3.4vw,2.1rem);box-shadow:0 30px 70px -36px rgba(240,181,63,.3)}
+  .capture-copy p{color:var(--soft);font-size:1rem;margin:.4rem 0 0;max-width:min(44ch,100%)}
+  .capture-form{display:flex;flex-wrap:wrap;gap:.65rem;margin-top:1.25rem}
+  .capture-form input[type=email]{flex:1 1 15rem;min-width:0;background:rgba(7,10,18,.75);
+    border:1px solid rgba(243,241,234,.2);border-radius:999px;color:var(--ink);
+    font-family:"Mulish",system-ui,sans-serif;font-size:.95rem;padding:.85em 1.2em;outline:none;
+    transition:border-color .18s,box-shadow .18s}
+  .capture-form input[type=email]::placeholder{color:var(--faint)}
+  .capture-form input[type=email]:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(240,181,63,.15)}
+  .capture-form button[type=submit]{font-family:"Mulish",system-ui,sans-serif;font-weight:800;font-size:.95rem;
+    background:var(--gold);color:#1a1200;border:0;padding:.85em 1.6em;border-radius:999px;cursor:pointer;
+    box-shadow:0 14px 40px -16px var(--gold);transition:transform .15s,filter .15s}
+  @media(max-width:520px){
+    .capture-form input[type=email]{flex:1 1 100%}
+    .capture-form button[type=submit]{flex:1 1 100%}
+  }
+  .capture-form button[type=submit]:hover{transform:translateY(-1px);filter:brightness(1.07)}
+  .capture-form button[type=submit]:disabled{opacity:.6;cursor:default;transform:none}
+  .capture-form .status{flex:1 0 100%;margin:.35rem 0 0;font-size:.86rem;color:var(--soft);min-height:1.1em}
+  .capture-form .status.ok{color:var(--teal)}
+  .capture-form .status.warn{color:var(--gold)}
+  .capture-form .status.err{color:#ff8272}
+  .capture-alt{margin-top:.95rem;font-size:.82rem;color:var(--faint)}
+  .capture-alt a{color:var(--teal);text-decoration:underline;text-underline-offset:3px}
+  .hp{position:absolute;left:-9999px;top:0;width:1px!important;height:1px!important;
+    min-width:0!important;max-width:1px!important;min-height:0!important;max-height:1px!important;
+    padding:0!important;border:0!important;opacity:0!important;font-size:0!important;line-height:0!important;
+    overflow:hidden!important;pointer-events:none!important}
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+  /* slim variant — a one-line offer between sections */
+  .capture--slim{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(1rem,3vw,2.4rem);align-items:center;
+    border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding-block:2.1rem;max-width:none}
+  @media(max-width:860px){.capture--slim{grid-template-columns:1fr}}
+  .capture--slim .capture-form{margin-top:0}
+  .capture--slim .kicker{margin-bottom:.5rem}
+  .capture-band{padding-block:0 0 clamp(3.5rem,7vw,6rem)}
+
   /* cta */
   .end{text-align:center}
   .end h2{font-size:var(--fs-h2);color:#fff}
   .end .para{margin:1.2rem auto 2rem}
   .btn{display:inline-flex;align-items:center;gap:.6em;font-family:"Mulish";font-weight:800;font-size:.98rem;
     background:var(--gold);color:#1a1200;padding:.95em 1.7em;border-radius:999px;box-shadow:0 14px 40px -14px var(--gold)}
+  .btn.ghost{background:transparent;color:var(--teal);border:1px solid rgba(73,198,216,.45);box-shadow:none}
+  .btn.ghost:hover{border-color:var(--teal)}
+  .or{display:flex;align-items:center;gap:1rem;margin:1.5rem 0 .9rem;color:var(--faint);
+    font-size:.7rem;font-weight:800;letter-spacing:.24em;text-transform:uppercase}
+  .or::before,.or::after{content:"";flex:1;height:1px;background:var(--line)}
   .note{margin-top:1.5rem;font-size:.82rem;color:var(--faint)}
   footer{position:relative;z-index:2;border-top:1px solid var(--line);padding-block:2rem;color:var(--faint);font-size:.82rem}
   .foot-in{display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between}
@@ -181,13 +227,49 @@
     </div>
   </section>
 
+  <!-- mid-page capture: the visitor has read the premise, now capture the interest -->
+  <section class="block capture-band">
+    <div class="wrap">
+      <div class="capture capture--slim reveal">
+        <div class="capture-copy">
+          <span class="kicker">Book One, first</span>
+          <p>Get the cover reveal and free printable coloring pages the day Book 1 drops. No spam — just the Wilders.</p>
+        </div>
+        <form class="capture-form" method="post" action="mailto:usaprokeith@gmail.com" enctype="text/plain"
+              data-endpoint="" data-list="wilders-book1-mid">
+          <label class="sr-only" for="wl-email-mid">Email address</label>
+          <input id="wl-email-mid" type="email" name="email" placeholder="you@email.com" autocomplete="email" required>
+          <input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <button type="submit">Notify me</button>
+          <p class="status" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </div>
+  </section>
+
   <div class="marquee" aria-hidden="true"><div id="mq">Book one of many&nbsp;&nbsp;<b>✦</b>&nbsp;&nbsp;Ages 6–11&nbsp;&nbsp;<b>✦</b>&nbsp;&nbsp;How the world really works&nbsp;&nbsp;<b>✦</b>&nbsp;&nbsp;The Wilders&nbsp;&nbsp;<b>✦</b>&nbsp;&nbsp;</div></div>
 
   <section class="block end" id="follow">
     <div class="wrap">
       <h2 class="reveal">Be first when<br>Book 1 drops.</h2>
       <p class="para reveal">The cover reveal, the launch date, and free printable coloring pages of the Wilders. No spam.</p>
-      <a class="btn reveal" href="https://www.pinterest.com/madelynbobooks/" target="_blank" rel="noopener">Follow on Pinterest →</a>
+
+      <div class="capture reveal">
+        <div class="capture-box">
+          <form class="capture-form" method="post" action="mailto:usaprokeith@gmail.com" enctype="text/plain"
+                data-endpoint="" data-list="wilders-book1-end">
+            <label class="sr-only" for="wl-email-end">Email address</label>
+            <input id="wl-email-end" type="email" name="email" placeholder="you@email.com" autocomplete="email" required>
+            <input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+            <button type="submit">Notify me</button>
+            <p class="status" role="status" aria-live="polite"></p>
+          </form>
+          <p class="capture-alt">One email at launch. Unsubscribe in a click.</p>
+        </div>
+      </div>
+
+      <div class="or reveal">or</div>
+      <a class="btn ghost reveal" href="https://www.pinterest.com/madelynbobooks/" target="_blank" rel="noopener">Follow on Pinterest →</a>
       <p class="note reveal">Animated character scenes land here once the art's locked. This is the world; the Wilders move in next.</p>
     </div>
   </section>
@@ -337,6 +419,139 @@
     document.getElementById("eye").style.opacity=1; document.getElementById("tag").style.opacity=1;
     letters.forEach(function(l){l.style.opacity=1;});
   }
+})();
+
+/* ============================================================
+   EMAIL CAPTURE
+   Works with zero configuration today: submits via mailto: to the
+   series inbox. To switch to real in-page collection, create a free
+   Formspree form and paste its endpoint URL into each form's
+   data-endpoint attribute. Nothing else changes.
+   ============================================================ */
+(function(){
+  "use strict";
+  var INBOX = "usaprokeith@gmail.com";
+
+  function status(form, msg, kind){
+    var el = form.querySelector(".status");
+    if(!el) return;
+    el.textContent = msg;
+    el.className = "status" + (kind ? " " + kind : "");
+  }
+
+  /* first-touch source, so promo links can be traced later */
+  function source(){
+    try{
+      var q = new URLSearchParams(location.search);
+      var s = q.get("utm_source") || q.get("src") || "";
+      if(!s){
+        var k = "wilders_src";
+        var saved = localStorage.getItem(k);
+        if(saved) s = saved;
+      }
+      if(!s){
+        s = document.referrer ? (document.referrer.replace(/^https?:\/\//,"").split("/")[0] || "direct") : "direct";
+      }
+      var payload = {
+        utm_source: q.get("utm_source") || "",
+        utm_medium: q.get("utm_medium") || "",
+        utm_campaign: q.get("utm_campaign") || "",
+        ref: document.referrer || "",
+        source: s
+      };
+      try{ localStorage.setItem("wilders_src", s); }catch(e){}
+      return payload;
+    }catch(e){ return {source:"direct"}; }
+  }
+
+  function validEmail(v){
+    return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v);
+  }
+
+  document.querySelectorAll(".capture-form").forEach(function(form){
+    var input = form.querySelector('input[type="email"]');
+    var honey  = form.querySelector(".hp");
+    var button = form.querySelector('button[type="submit"]');
+    var alt    = form.parentNode.querySelector(".capture-alt");
+    var list = form.getAttribute("data-list") || "wilders";
+
+    // prefill hidden fields so Formspree receives the attribution
+    var src = source();
+    var fields = { list: list };
+    ["utm_source","utm_medium","utm_campaign","ref","source"].forEach(function(k){
+      fields[k] = src[k] || "";
+    });
+    Object.keys(fields).forEach(function(k){
+      var f = document.createElement("input");
+      f.type = "hidden"; f.name = k; f.value = fields[k] || "";
+      form.appendChild(f);
+    });
+
+    /* Native constraint validation stays ON (so it works with JS off too),
+       but we swap the browser bubble for our own styled message. */
+    input.addEventListener("invalid", function(ev){
+      ev.preventDefault();
+      status(form, "That email doesn't look right — check it and try again.", "err");
+    }, true);
+
+    form.addEventListener("submit", function(ev){
+      ev.preventDefault();
+      var email = (input.value || "").trim();
+
+      // bot trap: a real visitor never fills a hidden field
+      if(honey && honey.value){ status(form, "You're on the list.", "ok"); form.reset(); return; }
+
+      if(!validEmail(email)){
+        status(form, "That email doesn't look right — check it and try again.", "err");
+        input.focus();
+        return;
+      }
+
+      // read at submit time, so the endpoint can be swapped without a reload
+      var endpoint = (form.getAttribute("data-endpoint") || "").trim();
+
+      var done = function(msg){
+        status(form, msg, "ok");
+        button.textContent = "You're in";
+        button.disabled = true;
+        input.readOnly = true;
+        form.reset();
+      };
+
+      // --- zero-config path: hand off to the visitor's mail client ---
+      if(!endpoint){
+        var body = "Email: " + email + "\n\n" +
+                   "Add me to The Wilders launch list (Book 1: The Free Game That Wasn't).\n\n" +
+                   "—" + src.source + "—";
+        var href = "mailto:" + INBOX +
+                   "?subject=" + encodeURIComponent("Wilders list — " + email) +
+                   "&body=" + encodeURIComponent(body);
+        // if the browser has no mail client, leave a clickable fallback
+        if(alt){
+          alt.innerHTML = 'No email app opened? <a href="' + href + '">Email us directly</a> · ' +
+                          'or write to ' + INBOX + '.';
+        }
+        status(form, "Almost there — your email app should open with it filled in. Just hit send.", "warn");
+        window.location.href = href;
+        return;
+      }
+
+      // --- Formspree-ready path: POST in place, no redirect ---
+      button.disabled = true;
+      status(form, "Adding you…", "");
+      fetch(endpoint, {
+        method: "POST",
+        headers: { "Accept": "application/json" },
+        body: new FormData(form)
+      }).then(function(r){
+        if(!r.ok) throw new Error("bad status " + r.status);
+        done("You're on the list. Talk soon.");
+      }).catch(function(){
+        button.disabled = false;
+        status(form, "That didn't go through — email us at " + INBOX + " and we'll add you by hand.", "err");
+      });
+    });
+  });
 })();
 </script>
 </body>
